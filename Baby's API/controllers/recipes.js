@@ -1,45 +1,20 @@
 const Recipe = require('../models/recipe');
+const fs = require('fs')
 
 module.exports = {
 
-    allRecipies: async (req, res) => {
-        const recipes = await Recipe.find({ user: req.user.id });
-
-        res.send({
-            error: false,
-            message: 'All recipes',
-            recipes: recipes
-        })
-    },
-    myRecipe: async (req, res) => {
-        try {
-            const recipe = await Recipe.findById(req.params.id);
-
-            res.send({
-                error: false,
-                message: "Here is your recipe!",
-                recipe: recipe
-            })
-        }
-        catch (error) {
-            res.send({
-                error: true,
-                message: error.message
-            });
-        }
-    },
-    homePage: async (req, res) => {
+    home: async (req, res) => {
         try {
             const limitNumber = 4;
-            const freshNew = await Recipe.find({}).sort({ createdAt: -1 }).limit(limitNumber);
-            const mostPopular = await Recipe.find({}).sort({}).sort({ seen: -1 }).limit(limitNumber);
+            const fresh_new = await Recipe.find({}).sort({ createdAt: -1 }).limit(limitNumber);
+            const most_popular = await Recipe.find({}).sort({}).sort({ seen: -1 }).limit(limitNumber);
 
             res.send({
                 error: false,
-                message: 'Home page',
-                freshNew: freshNew,
-                mostPopular: mostPopular
-            });
+                message: 'Here is yout list of recipes',
+                most_popular: most_popular,
+                fresh_new: fresh_new
+            })
         } catch (error) {
             res.send({
                 error: true,
@@ -47,9 +22,58 @@ module.exports = {
             })
         }
     },
+    getRecipe: async (req, res) => {
+        try {
+            const recipe = await Recipe.findById(req.params.id);
+            res.send({
+                err: false,
+                message: `My recipe`,
+                recipe: recipe
+            })
+        }
+        catch (err) {
+            res.send({
+                err: true,
+                message: err.message
+            })
+        }
+    },
+    getMyRecipes: async (req, res) => {
+        try {
+            const recipes = await Recipe.find({ user: req.user.id });
+            res.send({
+                error: false,
+                message: `List of recipes`,
+                recipes: recipes
+            })
+        }
+        catch (err) {
+            res.send({
+                err: true,
+                message: err.message
+            })
+        }
+    },
+    seenRecipe: async (req, res) => {
+        try {
+            const recipe = await Recipe.findById(req.params.id);
+            await Recipe.findByIdAndUpdate(recipe._id,{seen: recipe.seen+=1})
+            res.send({
+                err: false,
+                message: "Your recipe has been seen",
+                recipe: recipe
+            })
+        }
+        catch (err) {
+            res.send({
+                err: true,
+                message: err.message
+            })
+        }
+    },
     breakfast: async (req, res) => {
         try {
-            const recipes = await Recipe.findOne({ category: 'Breakfast' });
+            const recipes = await Recipe.find({ category: 'Breakfast' });
 
             res.send({
                 error: false,
@@ -65,8 +89,7 @@ module.exports = {
     },
     brunch: async (req, res) => {
         try {
-            const recipes = await Recipe.findOne({ category: "Brunch" });
-
+            const recipes = await Recipe.find({ category: "Brunch" });
             res.send({
                 error: false,
                 message: 'Brunch list',
@@ -81,7 +104,7 @@ module.exports = {
     },
     lunch: async (req, res) => {
         try {
-            const recipes = await Recipe.findOne({ category: "Lunch" });
+            const recipes = await Recipe.find({ category: "Lunch" });
 
             res.send({
                 error: false,
@@ -97,7 +120,7 @@ module.exports = {
     },
     dinner: async (req, res) => {
         try {
-            const recipes = await Recipe.findOne({ category: "Dinner" });
+            const recipes = await Recipe.find({ category: "Dinner" });
 
             res.send({
                 error: false,
@@ -114,14 +137,16 @@ module.exports = {
     postRecipe: async (req, res) => {
         try {
             req.body.user = req.user.id;
-            let recipe = await Recipe.create(req.body);
-
-            res.status(201).send({
+            if (req.file) { req.body.image = `images/recipes/${req.file.filename}` }
+            else { req.body.image = "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-keto-pizza-073-1544039876.jpg?crop=0.668xw:1.00xh;0.233xw,0.00255xh&resize=980:*" };
+            let recipe = await Recipe.create(req.body)
+            res.send({
                 error: false,
-                message: `${req.user.id} has created a new recipe!`,
+                message: 'New recipe created',
                 recipe: recipe
             })
-        } catch (error) {
+        }
+        catch (error) {
             res.send({
                 error: true,
                 message: error.message
@@ -130,31 +155,45 @@ module.exports = {
     },
     updateRecipe: async (req, res) => {
         try {
-            await Recipe.findByIdAndUpdate(req.params.id, req.body);
-
+            req.body.user = req.user.id;
+            const recipe = await Recipe.findById(req.params.id);
+            if (req.file) {
+                req.body.image = `images/recipes/${req.file.filename}`;
+                recipeByImage = await Recipe.find({ image: recipe.image });
+                if (recipeByImage.length === 1 && req.body.image !== recipe.image && recipe.image !== "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-keto-pizza-073-1544039876.jpg?crop=0.668xw:1.00xh;0.233xw,0.00255xh&resize=980:*") {
+                    fs.unlinkSync(`public/${recipe.image}`)
+                }
+            } else {
+                req.body.image = recipe.image
+            }
+            await Recipe.findByIdAndUpdate(req.params.id, req.body)
             res.send({
-                error: false,
-                message: `${req.body.title} has been updated`
+                err: false,
+                message: 'Your recipe has been updated'
             })
-        } catch (error) {
+        }
+        catch (err) {
             res.send({
-                error: true,
-                message: error.message
+                err: true,
+                message: err.message,
             })
         }
     },
     deleteRecipe: async (req, res) => {
         try {
-            await Recipe.findByIdAndDelete(req.params.id);
-
+            const recipe = await Recipe.findById(req.params.id);
+            recipeByImage = await Recipe.find({ image: recipe.image });
+            if (recipeByImage.length === 1 && recipe.image !== "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-keto-pizza-073-1544039876.jpg?crop=0.668xw:1.00xh;0.233xw,0.00255xh&resize=980:*") { fs.unlinkSync(`public/${recipe.image}`) };
+            await Recipe.deleteOne({ _id: req.params.id })
             res.send({
-                error: false,
-                message: 'Recipe is deleted!'
+                err: false,
+                message: "Your recipe has been deleted"
             });
-        } catch (error) {
+        }
+        catch (err) {
             res.send({
-                error: true,
-                message: error.message
+                err: true,
+                message: err.message
             })
         }
     }

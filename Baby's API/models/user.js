@@ -9,6 +9,9 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  birthday: {
+      type: String
+  },
   email: {
     type: String,
     required: true,
@@ -18,13 +21,8 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  repeat_password: {
-    type: String,
-    required: true
-  },
-  birthday: {
-      type: Date,
-      default: Date.now()
+  image: {
+    type: String
   }
 }, { timestamps: true });
 

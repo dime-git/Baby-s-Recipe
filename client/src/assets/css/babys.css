@@ -1,0 +1,382 @@
+#inputFieldFirstName {
+    font-size: 93.75%;
+    font-family: sans-serif;
+}
+
+#inputFieldLastName {
+    font-size: 93.75%;
+    font-family: sans-serif;
+}
+
+#InputFieldEmail {
+    font-size: 93.75%;
+    font-family: sans-serif;
+}
+
+#inputFieldRepeatPassword {
+    font-size: 93.75%;
+    font-family: sans-serif;
+}
+
+#inputFieldBirthday {
+    font-size: 93.75%;
+    font-family: sans-serif;
+}
+
+#inputLabel {
+    font-family: sans-serif;
+    color: orange;
+}
+
+#greenButton {
+    background-color: rgb(140, 179, 25);
+    font-size: 93.75%;
+    font-family: sans-serif;
+    font-weight: 599;
+    border: none;
+    letter-spacing: 1px;
+    width: 100;
+    height: 40px;
+    margin-top: 4%;
+
+}
+
+#greenButton:hover {
+    color: white;
+    background-color: gray;
+}
+
+#body {
+    background-color: rgba(248, 247, 247);
+
+}
+
+#links {
+    font-size: 93.75%;
+    font-family: sans-serif;
+    margin-right: 0.6%;
+}
+
+#loginButton {
+    color: darkgrey;
+    background-color: transparent;
+    border: 2px solid rgb(182, 182, 182);
+    font-family: sans-serif;
+    font-size: 11px;
+    width: 80px;
+    height: 40px;
+    margin-left: -33%;
+}
+
+#loginButton:hover {
+    background-color: grey;
+    color: white;
+}
+
+#footer {
+    font-family: sans-serif;
+    font-weight: 599;
+    font-size: 87.50%;
+    color: white;
+}
+
+#footer #footerLinks {
+    font-weight: 599;
+    font-size: 87.50%;
+    color: white;
+}
+
+h3 {
+    margin-right: -15px;
+    text-align: center;
+    align-items: baseline;
+    display: flex;
+}
+
+h3:after {
+    color: lightgray;
+    flex: 1;
+    border-top: 1px;
+    content: '';
+}
+
+input[type="text"]::-webkit-input-placeholder {
+    color: darkgray;
+}
+
+input[type="password"]::-webkit-input-placeholder {
+    color: darkgray;
+}
+
+input[type="email"]::-webkit-input-placeholder {
+    color: darkgray;
+}
+
+input[type="number"]::-webkit-input-placeholder {
+    color: darkgray;
+}
+
+#textarea {
+    background-color: white;
+    color: darkgrey;
+    width: 100%;
+    border: none;
+    resize: none;
+    font-family: sans-serif;
+    font-size: 87.50%;
+    font-weight: 399;
+    overflow: hidden;
+}
+
+#card_text {
+    text-decoration-color: black;
+}
+
+#card_title {
+    color: orange;
+
+}
+
+#container {
+    background-color: rgb(248, 247, 242);
+    font-family: sans-serif;
+}
+
+#createButton {
+    text-align: "end";
+    width: "5%";
+
+}
+
+#undoCircle {
+    background-color: "orange";
+    font-size: "320%";
+    margin-top: "-5px";
+}
+
+#textLogin {
+    margin-top: 6%;
+}
+
+#coloneLogin {
+    margin-right: 10%;
+}
+
+#h1Login {
+    font-weight: bold;
+    color: orange;
+}
+
+#divLogin {
+    color: darkgray;
+    font-weight: normal;
+    font-size: 18px;
+    margin-top: 4%;
+}
+
+#createRecipe {
+    text-align: end;
+    width: 5%;
+}
+
+#createButton {
+    color: orange;
+    font-size: 260%;
+}
+
+#myRecipesRow {
+    margin-top: 3%;
+
+}
+
+#myRecipe {
+    margin-right: -20px;
+    color: rgb(150, 187, 54)
+}
+
+#undoCircle {
+    text-align: end;
+    width: 10%;
+    color: orange;
+}
+
+#buttonUndoCircle {
+    color: orange;
+    font-size: 320%;
+    margin-top: -5px;
+}
+
+#myRecipeRow {
+    margin-top: 7%;
+}
+
+#rowMyRecipe {
+    height: 34%;
+    width: 130%;
+}
+
+#imageMyRecipe {
+    height: 100%;
+    width: 100%;
+    border-radius: 7%;
+}
+
+#buttonUploadImage {
+    width: 90%;
+    margin: auto;
+    margin-top: 10%;
+    font-size: 14px;
+}
+
+#formRecipeImage {
+    display: none;
+}
+
+#recipeTitle {
+    width: 96%;
+    margin: auto;
+}
+
+#recipeDescription {
+    margin-left: 1%;
+    width: 30%;
+}
+
+#SaveMyRecipe {
+    margin: auto;
+    margin-top: 7%;
+}
+
+
+#recipeTitleCol {
+    margin-left: 4%;
+    width: 48%;
+}
+
+#pageTitle {
+    margin-bottom: 3%;
+    color: rgb(150, 187, 54);
+}
+
+#modalHeader {
+    padding-bottom: 1px;
+}
+
+#modalTitle {
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    color: orange;
+    font-size: 33px;
+}
+
+#best_served_for {
+    font-size: 17px;
+    color: rgb(140, 179, 25);
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+#span_id {
+    position: absolute;
+    left: 25%;
+    background-color: rgb(140, 179, 25);
+    border-radius: 30%/50%;
+    font-size: 15px;
+    font-weight: normal;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    opacity: 0.9;
+}
+
+#card_text_modal {
+    font-size: 15px;
+    word-break: 'break-word';
+    padding-bottom: 3%;
+    color: gray;
+}
+
+#button_style_modal {
+    position: absolute;
+    left: 85%;
+    bottom: 4%;
+    padding: 0%;
+    background-color: rgb(140, 179, 25);
+    border-color: rgb(140, 179, 25);
+    height: 25px;
+    width: 25px;
+}
+
+#row_idk {
+    margin-top: 7%;
+}
+
+#recipe_image {
+    height: 34%;
+    width: 130%;
+}
+
+#buttonImage {
+    width: 90%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+#form_control {
+    display: none;
+}
+
+#recipe_title_col {
+    margin-left: 4%;
+    width: 48%;
+}
+
+#recipe_col {
+    margin-left: 1%;
+    width: 30%;
+}
+
+#button {
+    margin: auto;
+    margin-top: 6%;
+}
+
+#save_button {
+    width: 20%;
+}
+
+#fileinput {
+    display: none;
+}
+
+#category_recipe {
+    position: absolute;
+    background-color: rgb(140, 179, 25);
+    font-size: 15px;
+    top: 5%;
+    left: 5%;
+    color: white;
+    font-weight: bold;
+    border-radius: 20%/50%;
+}
+
+#footer_nav {
+    margin-top: 10%;
+    height: 12rem;
+    background-color: rgb(75, 75, 75);
+}
+
+#header {
+    padding-top: 3%;
+    margin-bottom: 4%;
+}
+
+#createAccount {
+    width: 120px;
+    height: 40px;
+    background-color: rgb(150, 187, 54);
+    font-size: 11px;
+}
+
+#footerColor {
+    color: white;
+}

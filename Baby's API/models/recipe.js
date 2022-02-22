@@ -5,6 +5,10 @@ const recipeSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    content: {
+        type: String,
+        required: true
+    },
     category: {
         type: String,
         required: true,
@@ -17,22 +21,20 @@ const recipeSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    short_description: {
+        short_description: {
         type: String,
         required: true
     },
-    recipe: {
-        type: String,
-        required: true
-    }, 
     seen: {
         type: Number,
-        required: true,
         default: 0
     },
     user: {
         type: mongoose.Types.ObjectId,
         ref: 'user'
+    },
+    image: {
+        type: String,
     }
 }, { timestamps: true })
 module.exports = mongoose.model('recipe', recipeSchema);

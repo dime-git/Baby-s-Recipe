@@ -1,3 +1,3 @@
-export const api = {
+export const API = {
     root: 'http://localhost:5000'
 }

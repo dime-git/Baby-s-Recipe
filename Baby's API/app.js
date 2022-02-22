@@ -4,15 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-const indexRouter = require('./routes/index')
+const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const recipesRouter = require('./routes/recipes');
 const cors = require('cors');
 
+require('dotenv').config();
+
 var app = express();
 
 mongoose.connect(`mongodb+srv://BabyRecipes:${process.env.MONGODB_PASSWORD}@babyrecipe.hvoxe.mongodb.net/test`)
-//(`mongodb+srv://BabyRecipes:${process.env.AUTH_SECRET}@babyrecipe.hvoxe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,6 +44,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send("Sesion expired, please log in again");
+  }
 });
 
 module.exports = app;
